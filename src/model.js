@@ -43,3 +43,4 @@ const Module = function(initialState = {}) {
 };
 
 export default Module;
+

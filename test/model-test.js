@@ -59,7 +59,6 @@ describe('Model', () => {
 
     describe('registerAsync', () => {
         let instance;
-        let promise;
         let id;
 
         beforeEach(() => {
@@ -85,11 +84,14 @@ describe('Model', () => {
          * completion of an async method
          */
         it('should populate the state with the retrieved value', (done) => {
-            promise.then((id) => {
-                const state = instance.getState();
-                expect(state[id]).to.equal(testValue);
-                done();
-            });
+
+            const promise = Promise.resolve(testValue);
+            instance.registerAsync(promise)
+                .then((id) => {
+                    const state = instance.getState();
+                    expect(state[id]).to.equal(testValue);
+                    done();
+                });
         });
     })
 });
